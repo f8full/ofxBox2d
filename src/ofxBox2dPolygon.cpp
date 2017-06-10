@@ -36,9 +36,9 @@ void ofxBox2dPolygon::destroy() {
 }
 
 //----------------------------------------
-void ofxBox2dPolygon::addTriangle(const ofDefaultVertexType &a,
-                                  const ofDefaultVertexType &b,
-                                  const ofDefaultVertexType &c) {
+void ofxBox2dPolygon::addTriangle(const ofVec3f &a,
+                                  const ofVec3f &b,
+                                  const ofVec3f &c) {
 
     addVertex(a); addVertex(b);	addVertex(c);
 	
@@ -51,7 +51,7 @@ void ofxBox2dPolygon::addTriangle(const ofDefaultVertexType &a,
  These were in ofPolyline and now are gone?
 */
 //----------------------------------------
-void ofxBox2dPolygon::addVertexes(vector <ofDefaultVertexType> &pts) {
+void ofxBox2dPolygon::addVertexes(vector <ofVec3f> &pts) {
 	for (size_t i=0; i<pts.size(); i++) {
 		addVertex(pts[i].x, pts[i].y);
 	}
@@ -171,7 +171,7 @@ void ofxBox2dPolygon::create(b2World * b2dworld) {
 	}
 	else {
         makeConvexPoly();
-		vector<ofDefaultVertexType> pts = ofPolyline::getVertices();
+		vector<ofVec3f> pts = ofPolyline::getVertices();
         vector<b2Vec2>verts;
         for (int i=0; i<MIN((int)pts.size(), b2_maxPolygonVertices); i++) {
             verts.push_back(screenPtToWorldPt(pts[i]));
@@ -189,7 +189,7 @@ void ofxBox2dPolygon::create(b2World * b2dworld) {
         
     }
     
-    vector<ofDefaultVertexType> pts = ofPolyline::getVertices();
+    vector<ofVec3f> pts = ofPolyline::getVertices();
     mesh.clear();
     ofPath path;
     ofPoint center = getCentroid2D();
@@ -261,7 +261,7 @@ void ofxBox2dPolygon::addRepulsionForce(ofVec2f pt, float amt) {
 }
 
 //----------------------------------------
-vector <ofDefaultVertexType>& ofxBox2dPolygon::getPoints() {
+vector <ofVec3f>& ofxBox2dPolygon::getPoints() {
     
     if(body != NULL) {
 	
@@ -293,7 +293,7 @@ void ofxBox2dPolygon::draw() {
 	}
     ofPushMatrix();
     ofTranslate(getPosition());
-    ofRotateDeg(getRotation(), 0, 0, 1);
+    ofRotate(getRotation(), 0, 0, 1);
     mesh.draw();
     ofPopMatrix();
 }

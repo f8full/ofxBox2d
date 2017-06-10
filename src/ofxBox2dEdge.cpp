@@ -42,7 +42,7 @@ void ofxBox2dEdge::create(b2World * b2dworld) {
 	bd.type			= density <= 0.0 ? b2_staticBody : b2_dynamicBody;
 	body			= b2dworld->CreateBody(&bd);
     
-    vector<ofDefaultVertexType>&pts = ofPolyline::getVertices();
+    vector<ofVec3f>&pts = ofPolyline::getVertices();
 
     for(int i=1; i<(int)size(); i++) {
         b2EdgeShape edge;
